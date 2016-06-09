@@ -38,6 +38,12 @@ has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>"}
     "#{family_name_kana} #{first_name_kana}"
   end
 
+  def full_profile?
+    # 姓名、姓名カナ、画像が設定されていないとfalseを返すようにしましょう。
+     avatar? && family_name? && first_name? && family_name_kana? && first_name_kana?
+  end
+
+
   private
   def has_group_key?
     group_key.present?
