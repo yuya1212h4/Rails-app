@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable,authentication_keys: [:email, :group_key]
 
+has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>"}
+  validates_attachment_content_type :avatar, content_type: ["image/jpg","image/jpeg","image/png"]
 
   belongs_to :group
 
@@ -27,6 +29,20 @@ class User < ActiveRecord::Base
       false
     end
   end
+
+  def name
+    "#{family_name} #{first_name}"
+  end
+
+  def name_kana
+    "#{family_name_kana} #{first_name_kana}"
+  end
+
+  def full_profile?
+    # 姓名、姓名カナ、画像が設定されていないとfalseを返すようにしましょう。
+     avatar? && family_name? && first_name? && family_name_kana? && first_name_kana?
+  end
+
 
   private
   def has_group_key?
