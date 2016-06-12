@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show,:edit,:update]
   resources :groups, only: [:show, :edit, :update]
   resources :questions, only: [:create]
+  resources :answers, only: [:new, :create]
 
 
   # The priority is based upon order of creation: first created -> highest priority.
