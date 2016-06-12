@@ -16,6 +16,8 @@ has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>"}
   belongs_to :group
   has_many :questions, ->{ order("created_at DESC") }
   has_many :answers, ->{ order("updated_at DESC")}
+  has_many :answered_questions, through: :answers, source: :question
+
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
