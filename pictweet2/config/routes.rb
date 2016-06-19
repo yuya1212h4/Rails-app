@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   patch 'tweets/:id' => 'tweets#update'
   delete 'tweets/:id' => 'tweets#destroy'
   get 'tweets/:id/edit' => 'tweets#edit'
+  get 'tweets/:id' => 'tweets#show'
 end
